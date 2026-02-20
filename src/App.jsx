@@ -2,6 +2,7 @@ import Hero from './components/Hero'
 import Details from './components/Details'
 import Activities from './components/Activities'
 import RSVPForm from './components/RSVPForm'
+import Registry from './components/Registry'
 import Footer from './components/Footer'
 import { useEffect, useState } from 'react'
 
@@ -41,6 +42,7 @@ function App() {
         <Hero />
         <Details />
         <Activities />
+        <Registry />
         <RSVPForm />
       </main>
 
