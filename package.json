@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "thepandaandthepenguin.com",
+  "homepage": "https://g4mm4p4nd4.github.io/BabySprinkle/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
