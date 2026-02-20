@@ -1,31 +1,59 @@
+import { motion } from 'framer-motion'
+import Penguin from './Penguin'
+
 export default function Footer() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <footer className="py-12 px-4 text-center border-t border-sketch-gray/10">
-      <div className="max-w-2xl mx-auto">
-        {/* Decorative penguin mini */}
-        <div className="flex justify-center mb-4">
-          <svg width="32" height="38" viewBox="0 0 180 220" fill="none" aria-hidden="true" className="opacity-30">
-            <ellipse cx="90" cy="140" rx="52" ry="65" fill="#2d2d2d" />
-            <ellipse cx="90" cy="148" rx="32" ry="48" fill="white" />
-            <circle cx="90" cy="72" r="35" fill="#2d2d2d" />
-            <ellipse cx="90" cy="78" rx="22" ry="18" fill="white" />
-            <circle cx="79" cy="72" r="5" fill="#2d2d2d" />
-            <circle cx="101" cy="72" r="5" fill="#2d2d2d" />
-            <path d="M85 82 L90 90 L95 82 Z" fill="#E8963E" />
-            <ellipse cx="90" cy="48" rx="32" ry="10" fill="#4A74A3" />
-            <path d="M60 48 C 60 28, 90 20, 95 22 C 105 25, 120 35, 120 48" fill="#4A74A3" />
-          </svg>
+    <footer className="py-24 px-4 text-center border-t border-sketch-gray/5 relative overflow-hidden bg-white">
+      {/* Decorative center wash */}
+      <div className="absolute inset-0 pointer-events-none opacity-20">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-warm-gold/10 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
+        <motion.button
+          onClick={scrollToTop}
+          whileHover={{ y: -8 }}
+          whileActive={{ scale: 0.95 }}
+          className="group flex flex-col items-center justify-center mb-12 mx-auto cursor-pointer transition-all duration-500"
+          title="Back to Top"
+        >
+          <div className="w-20 h-20 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
+            <img
+              src="/beretPenguin.png"
+              alt="Back to Top Penguin"
+              className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
+            />
+          </div>
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileHover={{ opacity: 1 }}
+            className="text-[10px] text-beret-blue font-bold uppercase tracking-[0.3em] mt-4"
+          >
+            Back to Top
+          </motion.span>
+        </motion.button>
+
+        <h2 className="font-playfair text-3xl md:text-4xl text-beret-blue mb-6 tracking-wide">
+          Victoria&apos;s Baby Sprinkle
+        </h2>
+
+        <div className="flex flex-wrap items-center justify-center gap-4 text-sketch-gray text-sm mb-12 font-light tracking-wide italic">
+          <span>March 29, 2026</span>
+          <span className="text-warm-gold not-italic">•</span>
+          <span>Eclair Affaire</span>
+          <span className="text-warm-gold not-italic">•</span>
+          <span>Weston, FL</span>
         </div>
 
-        <p className="font-script text-xl text-beret-blue mb-2">
-          Victoria&apos;s Baby Sprinkle
-        </p>
-        <p className="text-sketch-gray text-xs">
-          March 29, 2026 &bull; Eclair Affaire &bull; Weston, FL
-        </p>
-        <p className="text-sketch-gray/50 text-xs mt-4">
-          Made with love for Victoria and the little one.
-        </p>
+        <div className="pt-8 border-t border-sketch-gray/5">
+          <p className="text-sketch-gray/40 text-[9px] font-bold tracking-[0.4em] uppercase">
+            Made with love • Parisian Penguin Edition
+          </p>
+        </div>
       </div>
     </footer>
   )
