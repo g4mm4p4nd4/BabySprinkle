@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run dev:*)",
+      "WebFetch(domain:commons.wikimedia.org)",
+      "WebFetch(domain:freesvg.org)",
+      "WebFetch(domain:upload.wikimedia.org)",
+      "Bash(curl:*)",
+      "Bash(ls:*)"
+    ]
+  }
+}
