@@ -23,7 +23,7 @@ export default function Footer() {
         >
           <div className="w-20 h-20 opacity-30 group-hover:opacity-100 transition-opacity duration-500">
             <img
-              src="/beretPenguin.png"
+              src={`${import.meta.env.BASE_URL}beretPenguin.png`}
               alt="Back to Top Penguin"
               className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-500"
             />

@@ -99,7 +99,7 @@ export default function RSVPForm() {
           <h2 className="font-playfair text-5xl md:text-6xl text-beret-blue">Join the Celebration</h2>
           <div className="mt-8 mx-auto w-16 h-px bg-warm-gold" />
           <p className="mt-8 text-charcoal text-xl font-light italic">
-            Kindly reply by <span className="font-bold text-beret-blue not-italic">March 15, 2026</span>
+            Kindly reply by <span className="font-bold text-beret-blue not-italic">    March 15, 2026 </span>
           </p>
         </motion.div>
 
