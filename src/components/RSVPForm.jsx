@@ -4,10 +4,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQLLOJ7ndDktTi-9iXJLrzl96uY6e4dxyGSeWQFb5svsffGVkoR_f4XX4r0WCvFTOIkA/exec'
 
 export default function RSVPForm() {
-  const [submitted, setSubmitted] = useState(false)
-  const [submitting, setSubmitting] = useState(false)
-  const [error, setError] = useState('')
+  const [status, setStatus] = useState('idle') // 'idle' | 'validating' | 'sending' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('')
   const [flyPlane, setFlyPlane] = useState(false)
+
+  const trackRSVPEvent = (eventName, data = {}) => {
+    console.log(`[RSVP Analytics] ${eventName}`, data)
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', eventName, { event_category: 'RSVP', ...data })
+    }
+  }
 
   const [form, setForm] = useState({
     name: '',
@@ -19,19 +25,29 @@ export default function RSVPForm() {
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
-    setError('')
+    if (status === 'error') setStatus('idle')
+    setErrorMessage('')
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setError('')
+
+    if (status === 'sending') return
+
+    const isRetry = status === 'error'
+    trackRSVPEvent(isRetry ? 'retry' : 'attempt', { guests: form.guests })
+
+    setStatus('validating')
+    setErrorMessage('')
 
     if (!form.name.trim() || !form.email.trim()) {
-      setError('Please fill in your name and email.')
+      setErrorMessage('Please fill in your name and email.')
+      setStatus('error')
+      trackRSVPEvent('error', { reason: 'validation_failed' })
       return
     }
 
-    setSubmitting(true)
+    setStatus('sending')
     setFlyPlane(true)
 
     try {
@@ -48,13 +64,14 @@ export default function RSVPForm() {
         })
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      setSubmitted(true)
+      trackRSVPEvent('sent')
+      setStatus('success')
     } catch (err) {
-      console.error(err)
-      setError('Something went wrong. Please try again.')
-    } finally {
-      setSubmitting(false)
+      console.error('RSVP Submission Error:', err)
+      setErrorMessage('Network error. Please check your connection and try again.')
+      setStatus('error')
+      trackRSVPEvent('error', { reason: 'network_exception', details: err.message })
+      setFlyPlane(false)
     }
   }
 
@@ -106,7 +123,7 @@ export default function RSVPForm() {
         {/* Form Container */}
         <motion.div variants={itemVariants} className="relative">
           <AnimatePresence mode="wait">
-            {submitted ? (
+            {status === 'success' ? (
               <motion.div
                 key="success"
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -126,15 +143,27 @@ export default function RSVPForm() {
                 </div>
 
                 <h3 className="font-script text-6xl md:text-8xl text-beret-blue mb-8">Merci!</h3>
-                <p className="text-charcoal text-2xl mb-4 font-medium">Your RSVP is confirmed.</p>
-                <p className="text-sketch-gray text-lg mb-12 max-w-sm mx-auto font-light italic">
-                  We&apos;ve sent the details to your inbox. Can&apos;t wait to see you!
+                <p className="text-charcoal text-2xl mb-4 font-medium">Request sent.</p>
+                <p className="text-sketch-gray text-lg mb-8 max-w-sm mx-auto font-light italic">
+                  We&apos;ve sent your RSVP to the host. If you don&apos;t receive a confirmation soon, please try again or contact the host.
                 </p>
 
-                <div className="inline-block bg-[#f8f6f2] rounded-3xl px-10 py-5 border border-sketch-gray/5">
+                <div className="inline-block bg-[#f8f6f2] rounded-3xl px-10 py-5 border border-sketch-gray/5 mb-8">
                   <p className="font-playfair text-xl text-charcoal italic">
                     See you in Paris! <span className="text-xs not-italic opacity-40 ml-2 uppercase font-bold tracking-widest">(aka Weston)</span>
                   </p>
+                </div>
+
+                <div className="text-center">
+                  <button
+                    onClick={() => {
+                      setStatus('idle')
+                      setFlyPlane(false)
+                    }}
+                    className="text-sm font-bold text-beret-blue hover:text-sage transition-colors underline underline-offset-4"
+                  >
+                    Send another RSVP
+                  </button>
                 </div>
               </motion.div>
             ) : (
@@ -243,7 +272,7 @@ export default function RSVPForm() {
 
                 {/* Error State */}
                 <AnimatePresence>
-                  {error && (
+                  {errorMessage && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
@@ -255,7 +284,7 @@ export default function RSVPForm() {
                         <line x1="12" y1="8" x2="12" y2="12" />
                         <line x1="12" y1="16" x2="12.01" y2="16" />
                       </svg>
-                      {error}
+                      {errorMessage}
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -264,7 +293,7 @@ export default function RSVPForm() {
                 <div className="mt-12 text-center relative z-10">
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={status === 'sending' || status === 'validating'}
                     className="w-full relative px-10 py-5 bg-beret-blue text-white font-bold text-xl rounded-full
                                shadow-xl shadow-beret-blue/20 hover:shadow-2xl hover:shadow-beret-blue/40
                                hover:-translate-y-1 active:translate-y-0
@@ -274,17 +303,17 @@ export default function RSVPForm() {
                   >
                     <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
 
-                    {submitting ? (
+                    {status === 'sending' || status === 'validating' ? (
                       <span className="relative flex items-center justify-center gap-4">
                         <svg className="animate-spin w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
                           <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-20" />
                           <path className="opacity-90" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                         </svg>
-                        Sending...
+                        {status === 'validating' ? 'Validating...' : 'Sending...'}
                       </span>
                     ) : (
                       <span className="relative flex items-center justify-center gap-4">
-                        Send RSVP
+                        {status === 'error' ? 'Retry RSVP' : 'Send RSVP'}
                         <motion.svg
                           width="24"
                           height="24"
