@@ -64,7 +64,7 @@ export default function Registry() {
                         </div>
 
                         <p className="text-sketch-gray leading-relaxed text-lg font-light italic mb-8 z-10">
-                            Your presence is the greatest gift of all. If you wish to bless the growing family with a gift, they are registered at Babylist.
+                            Your presence is the greatest gift of all. If you wish to bless the growing family with a gift, they are registered on Babylist.
                         </p>
 
                         <a
