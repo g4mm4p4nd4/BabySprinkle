@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQLLOJ7ndDktTi-9iXJLrzl96uY6e4dxyGSeWQFb5svsffGVkoR_f4XX4r0WCvFTOIkA/exec'
+import { getEnvConfig } from '../config/env'
 
 export default function RSVPForm() {
+  const { rsvpEndpoint, isProd, isValidRsvpEndpoint } = getEnvConfig()
   const [status, setStatus] = useState('idle') // 'idle' | 'validating' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('')
   const [flyPlane, setFlyPlane] = useState(false)
@@ -53,8 +53,8 @@ export default function RSVPForm() {
     try {
       const urlEncodedData = new URLSearchParams(form).toString()
 
-      if (GOOGLE_SCRIPT_URL && !GOOGLE_SCRIPT_URL.includes('YOUR_GOOGLE_APPS_SCRIPT')) {
-        await fetch(GOOGLE_SCRIPT_URL, {
+      if (isValidRsvpEndpoint) {
+        await fetch(rsvpEndpoint, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
@@ -62,6 +62,8 @@ export default function RSVPForm() {
           },
           body: urlEncodedData,
         })
+      } else {
+        throw new Error('Invalid or missing RSVP endpoint configuration.')
       }
 
       trackRSVPEvent('sent')
@@ -289,11 +291,18 @@ export default function RSVPForm() {
                   )}
                 </AnimatePresence>
 
+                {/* Admin Error State (Non-Production) */}
+                {!isValidRsvpEndpoint && !isProd && (
+                  <div className="mt-8 p-4 rounded-2xl bg-orange-50 text-orange-800 text-sm text-center border border-orange-200">
+                    <strong>Admin Error:</strong> <code>VITE_RSVP_ENDPOINT</code> is missing or invalid in your .env file. Form submission is disabled.
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <div className="mt-12 text-center relative z-10">
                   <button
                     type="submit"
-                    disabled={status === 'sending' || status === 'validating'}
+                    disabled={status === 'sending' || status === 'validating' || !isValidRsvpEndpoint}
                     className="w-full relative px-10 py-5 bg-beret-blue text-white font-bold text-xl rounded-full
                                shadow-xl shadow-beret-blue/20 hover:shadow-2xl hover:shadow-beret-blue/40
                                hover:-translate-y-1 active:translate-y-0
