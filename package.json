@@ -15,6 +15,7 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.4.2",
     "framer-motion": "^12.34.2",
     "gh-pages": "^6.3.0",
     "react": "^19.2.0",
