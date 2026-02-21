@@ -5,6 +5,6 @@ export const getEnvConfig = () => {
     return {
         rsvpEndpoint,
         isProd,
-        isValidRsvpEndpoint: Boolean(rsvpEndpoint && rsvpEndpoint.startsWith('http')),
+        isValidRsvpEndpoint: Boolean(rsvpEndpoint && rsvpEndpoint.startsWith('https://')),
     };
 };
