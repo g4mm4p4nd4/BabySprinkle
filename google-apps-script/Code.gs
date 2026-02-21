@@ -104,6 +104,9 @@ function doPost(e) {
 
     // Send confirmation email
     sendConfirmationEmail(name, email, guests);
+    
+    // Send admin notification email
+    sendAdminNotificationEmail(name, guests);
 
     return ContentService
       .createTextOutput(JSON.stringify({ result: 'success' }))
@@ -205,6 +208,80 @@ function sendConfirmationEmail(name, email, guests) {
 
   MailApp.sendEmail({
     to: email,
+    subject: subject,
+    htmlBody: htmlBody
+  });
+}
+
+function sendAdminNotificationEmail(name, guests) {
+  var adminEmail = "victoria@est0118.family";
+  var subject = "New RSVP Alert: " + name;
+  var sheetLink = "https://docs.google.com/spreadsheets/d/1A2_vqdTr_cKNBNtNkNiUcjx0Qy9Fp8HrRcI5ZUSnZxM/edit?usp=sharing";
+
+  // Email Template matching website aesthetic
+  var htmlBody = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>
+        body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333333; background-color: #F9F9F9; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+        .card { background: #ffffff; border-radius: 20px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); border: 1px solid #f0f0f0; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { color: #4A74A3; font-family: Georgia, serif; font-size: 32px; margin: 0 0 10px 0; font-weight: normal; }
+        .header p { color: #888888; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; margin: 0; }
+        .divider { width: 40px; height: 1px; background: #F2C94C; margin: 25px auto; }
+        
+        .content { font-size: 16px; line-height: 1.6; color: #333333; }
+        .highlight-box { background-color: #f4f6f8; border-radius: 12px; padding: 25px; margin: 25px 0; text-align: center; }
+        .info-row { margin-bottom: 15px; }
+        .info-label { font-weight: bold; color: #4A74A3; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+        .info-value { font-size: 18px; color: #333333; }
+        
+        .button-container { text-align: center; margin-top: 30px; }
+        .button { background-color: #4A74A3; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; }
+        
+        .footer { text-align: center; margin-top: 40px; color: #999999; font-size: 12px; }
+      </style>
+    </head>
+    <body>
+      <div class="container">
+        <div class="card">
+          <div class="header">
+            <p>New RSVP Alert</p>
+            <h1>Bonjour Victoria!</h1>
+          </div>
+          
+          <div class="divider"></div>
+          
+          <div class="content">
+            <p style="text-align: center; margin-bottom: 30px;">
+              A new RSVP has just been submitted for your Baby Sprinkle.
+            </p>
+            
+            <div class="highlight-box">
+              <div class="info-row">
+                <span class="info-label">Guest Name</span>
+                <span class="info-value">${name}</span>
+              </div>
+              <div class="info-row" style="margin-bottom: 0;">
+                <span class="info-label">Party Size</span>
+                <span class="info-value">${guests} ${guests == 1 ? 'seat' : 'seats'} reserved</span>
+              </div>
+            </div>
+            
+            <div class="button-container">
+              <a href="${sheetLink}" class="button">View RSVP Spreadsheet</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+
+  MailApp.sendEmail({
+    to: adminEmail,
     subject: subject,
     htmlBody: htmlBody
   });
