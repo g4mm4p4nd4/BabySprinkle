@@ -19,17 +19,49 @@
  */
 
 const SCRIPT_PROP = PropertiesService.getScriptProperties();
+const ALLOWED_ORIGINS = [
+    'https://thepandaandthepenguin.com',
+    'https://www.thepandaandthepenguin.com',
+    'http://localhost:5173',
+    'http://localhost:4174'
+];
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
 
   try {
+    // 1. CORS & Origin Validation (Reference / Optional strict checking)
+    const headers = {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'OPTIONS, POST',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Content-Type': 'application/json'
+    };
+
     lock.waitLock(10000); // Wait up to 10 seconds for other processes
 
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
-    var payload = e.parameter;
+    
+    // Fallback parser since 'no-cors' fetch strips headers impacting e.parameter assembly
+    var payload = {};
+    if (e.parameter && Object.keys(e.parameter).length > 0) {
+      payload = e.parameter;
+    } else if (e.postData && e.postData.contents) {
+      if (e.postData.contents.startsWith('{')) {
+        payload = JSON.parse(e.postData.contents);
+      } else {
+        // Parse raw URL-encoded string manually
+        var parts = e.postData.contents.split('&');
+        for (var i = 0; i < parts.length; i++) {
+          var keyValue = parts[i].split('=');
+          if (keyValue.length === 2) {
+            payload[decodeURIComponent(keyValue[0])] = decodeURIComponent(keyValue[1].replace(/\+/g, ' '));
+          }
+        }
+      }
+    }
 
-    // 1. Length restrictions and sanitization
+    // 2. Length restrictions and sanitization
     var name = (payload.name || '').trim().substring(0, 100);
     var email = (payload.email || '').trim().substring(0, 255);
     var guests = (payload.guests || '1').trim().substring(0, 10);
@@ -42,7 +74,7 @@ function doPost(e) {
       throw new Error("Missing required fields");
     }
 
-    // 2. Turnstile validation
+    // 3. Turnstile validation
     const secretKey = SCRIPT_PROP.getProperty('TURNSTILE_SECRET_KEY');
     
     if (secretKey) {
