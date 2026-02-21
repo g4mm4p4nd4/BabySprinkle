@@ -1,35 +1,26 @@
 import { motion } from 'framer-motion'
 
 const EclairIcon = () => (
-  <motion.svg
-    width="64" height="64" viewBox="0 0 56 56" fill="none"
+  <motion.img
+    src="/Penguineclair.png"
+    alt="Sweet Treats"
+    width="80"
+    height="80"
     whileHover={{ rotate: 5, scale: 1.1 }}
-  >
-    <ellipse cx="28" cy="32" rx="22" ry="12" fill="#D4A574" />
-    <path d="M10 28 C 10 22, 18 18, 28 18 C 38 18, 46 22, 46 28 C 46 32, 38 25, 28 25 C 18 25, 10 32, 10 28 Z" fill="#5D4037" />
-    <motion.ellipse
-      cx="28" cy="34" rx="18" ry="4" fill="#FFF8DC" opacity="0.8"
-      animate={{ opacity: [0.6, 0.9, 0.6] }}
-      transition={{ duration: 2, repeat: Infinity }}
-    />
-    <path d="M22 22 Q 28 20 34 22" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.3" />
-  </motion.svg>
+    style={{ objectFit: 'contain' }}
+  />
 )
 
 const DiaperIcon = () => (
-  <motion.svg
-    width="64" height="64" viewBox="0 0 56 56" fill="none"
+  <motion.img
+    src="/Penguindiaper.png"
+    alt="Diaper Raffle"
+    width="80"
+    height="80"
     animate={{ rotate: [-2, 2, -2] }}
     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-  >
-    <path d="M12 18 L44 18 L46 28 C 46 40, 38 46, 28 46 C 18 46, 10 40, 10 28 Z" fill="#F9F9F9" stroke="#E2E8F0" strokeWidth="1.5" />
-    <rect x="10" y="18" width="10" height="8" rx="2" fill="#4A74A3" opacity="0.3" />
-    <rect x="36" y="18" width="10" height="8" rx="2" fill="#4A74A3" opacity="0.3" />
-    {/* Subtle texture dots */}
-    <circle cx="20" cy="35" r="1.2" fill="#4A74A3" opacity="0.1" />
-    <circle cx="36" cy="35" r="1.2" fill="#4A74A3" opacity="0.1" />
-    <circle cx="28" cy="40" r="1.2" fill="#4A74A3" opacity="0.1" />
-  </motion.svg>
+    style={{ objectFit: 'contain' }}
+  />
 )
 
 export default function Activities() {

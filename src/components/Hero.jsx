@@ -3,6 +3,7 @@ import Penguin from './Penguin'
 import { motion } from 'framer-motion'
 
 export default function Hero() {
+
   const scrollToRSVP = () => {
     document.getElementById('rsvp')?.scrollIntoView({ behavior: 'smooth' })
   }
