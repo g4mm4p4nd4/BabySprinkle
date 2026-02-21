@@ -13,7 +13,8 @@ const SCRIPT_PROP = PropertiesService.getScriptProperties();
 const ALLOWED_ORIGINS = [
     'https://thepandaandthepenguin.com',
     'https://www.thepandaandthepenguin.com',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    'http://localhost:4174'
 ];
 
 function doPost(e) {
