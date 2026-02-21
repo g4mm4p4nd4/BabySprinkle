@@ -34,13 +34,20 @@ export default function Penguin({ onAnimationDone }) {
       {!showStatic && (
         <DotLottieReact
           src={`${import.meta.env.BASE_URL}PenguinLottie.lottie`}
+          animationId="Main Scene"
           loop
           autoplay
           dotLottieRefCallback={(ref) => {
             dotLottieRef.current = ref;
           }}
-          className="w-full h-auto drop-shadow-xl scale-[1.75] origin-bottom"
-          style={{ pointerEvents: 'none' }}
+          className="w-full h-auto drop-shadow-xl"
+          style={{
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none',
+            transform: 'scale(1.75) rotate(180deg)',
+            transformOrigin: 'center center'
+          }}
         />
       )}
 
@@ -49,7 +56,7 @@ export default function Penguin({ onAnimationDone }) {
         <img
           src={`${import.meta.env.BASE_URL}beretPenguin.png`}
           alt="Penguin wearing a blue beret standing"
-          className="w-full h-auto drop-shadow-xl scale-[0.8] origin-bottom transition-transform"
+          className="w-full h-auto drop-shadow-xl scale-[0.6] origin-bottom transition-transform"
           style={{ pointerEvents: 'none' }}
         />
       )}
