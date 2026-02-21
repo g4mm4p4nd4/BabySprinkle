@@ -5,15 +5,20 @@
  * 1. Create a new Google Sheet named "Victoria Sprinkle RSVPs"
  * 2. Add these column headers in Row 1:
  *    Timestamp | Name | Email | Guests | Dietary Restrictions | Message
- * 3. Go to Extensions > Apps Script
- * 4. Paste this entire script into the editor
- * 5. Click Deploy > New Deployment
- * 6. Select type: "Web app"
- * 7. Set "Execute as": Me
- * 8. Set "Who has access": Anyone
- * 9. Click Deploy and copy the Web App URL
- * 10. Paste that URL into src/components/RSVPForm.jsx (replace the GOOGLE_SCRIPT_URL constant)
+ * 3. Go to Project Settings (gear icon) -> Script Properties and add:
+ *    Property: TURNSTILE_SECRET_KEY
+ *    Value: (your Turnstile secret key)
+ * 4. Go to Extensions > Apps Script
+ * 5. Paste this entire script into the editor
+ * 6. Click Deploy > New Deployment
+ * 7. Select type: "Web app"
+ * 8. Set "Execute as": Me
+ * 9. Set "Who has access": Anyone
+ * 10. Click Deploy and copy the Web App URL
+ * 11. Paste that URL into your .env.local file as VITE_RSVP_ENDPOINT
  */
+
+const SCRIPT_PROP = PropertiesService.getScriptProperties();
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
@@ -22,13 +27,45 @@ function doPost(e) {
     lock.waitLock(10000); // Wait up to 10 seconds for other processes
 
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var payload = e.parameter;
 
-    var name = e.parameter.name || '';
-    var email = e.parameter.email || '';
-    var guests = e.parameter.guests || '1';
-    var dietary = e.parameter.dietary || '';
-    var message = e.parameter.message || '';
+    // 1. Length restrictions and sanitization
+    var name = (payload.name || '').trim().substring(0, 100);
+    var email = (payload.email || '').trim().substring(0, 255);
+    var guests = (payload.guests || '1').trim().substring(0, 10);
+    var dietary = (payload.dietary || '').trim().substring(0, 200);
+    var message = (payload.message || '').trim().substring(0, 500);
+    var turnstileToken = payload['cf-turnstile-response'] || '';
     var timestamp = new Date();
+    
+    if (!name || !email) {
+      throw new Error("Missing required fields");
+    }
+
+    // 2. Turnstile validation
+    const secretKey = SCRIPT_PROP.getProperty('TURNSTILE_SECRET_KEY');
+    
+    if (secretKey) {
+      if (!turnstileToken) {
+        throw new Error("Missing Cloudflare Turnstile token");
+      }
+      
+      const turnstileVerifyUrl = 'https://challenges.cloudflare.com/turnstile/v0/siteverify';
+      const verifyOptions = {
+        'method' : 'post',
+        'payload' : {
+          'secret' : secretKey,
+          'response' : turnstileToken
+        }
+      };
+      
+      const verifyResponse = UrlFetchApp.fetch(turnstileVerifyUrl, verifyOptions);
+      const verifyResult = JSON.parse(verifyResponse.getContentText());
+      
+      if (!verifyResult.success) {
+        throw new Error("Turnstile validation failed: " + JSON.stringify(verifyResult['error-codes']));
+      }
+    }
 
     // Append the RSVP data to the sheet
     sheet.appendRow([timestamp, name, email, guests, dietary, message]);
@@ -48,6 +85,12 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+// Handle preflight CORS requests from browser
+function doOptions(e) {
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.JSON);
 }
 
 function sendConfirmationEmail(name, email, guests) {
