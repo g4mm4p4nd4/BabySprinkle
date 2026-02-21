@@ -107,7 +107,7 @@ export default function Activities() {
               <div className="text-sketch-gray leading-relaxed mb-10 flex-grow font-light italic text-lg">
                 <p className="mb-6">To help the parents-to-be, please consider participating in our Diaper Raffle.</p>
                 <p className="text-charcoal font-medium not-italic text-xl">
-                  Bring a pack of diapers (size one and up, please no newborn) to be entered into a drawing to win a fantastic prize!
+                  Bring a pack of diapers (size one and up) to be entered into a drawing to win a fantastic prize!
                 </p>
               </div>
 
