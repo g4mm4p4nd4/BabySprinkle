@@ -21,7 +21,21 @@ function CalendarDropdown() {
 
   const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(eventTitle)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(description)}&location=${encodeURIComponent(location)}`
 
-  const icsContent = `BEGIN:VCALENDAR\nVERSION:2.0\nBEGIN:VEVENT\nDTSTART:${startDate}\nDTEND:${endDate}\nSUMMARY:${eventTitle}\nDESCRIPTION:${description}\nLOCATION:${location}\nEND:VEVENT\nEND:VCALENDAR`
+  const icsContent = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//The Panda and The Penguin//Baby Sprinkle//EN',
+    'BEGIN:VEVENT',
+    `UID:${new Date().getTime()}@thepandaandthepenguin.com`,
+    `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+    `DTSTART:${startDate}`,
+    `DTEND:${endDate}`,
+    `SUMMARY:${eventTitle}`,
+    `DESCRIPTION:${description}`,
+    `LOCATION:${location}`,
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n')
 
   const downloadICS = () => {
     const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' })
