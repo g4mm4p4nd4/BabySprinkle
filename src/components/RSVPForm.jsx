@@ -225,7 +225,7 @@ export default function RSVPForm() {
                           onChange={handleChange}
                           className={inputClasses + ' appearance-none cursor-pointer'}
                         >
-                          {[1, 2, 3, 4, 5].map(num => (
+                          {[1, 2].map(num => (
                             <option key={num} value={num}>{num} {num === 1 ? 'Guest' : 'Guests'}</option>
                           ))}
                         </select>
