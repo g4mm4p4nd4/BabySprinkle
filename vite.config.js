@@ -5,4 +5,16 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   base: '/',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'lottie': ['lottie-react', '@lottiefiles/dotlottie-react'],
+          'framer': ['framer-motion'],
+          'turnstile': ['@marsidev/react-turnstile']
+        }
+      }
+    }
+  }
 })
