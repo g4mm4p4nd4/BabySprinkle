@@ -111,7 +111,7 @@ function sendConfirmationEmail(name, email, guests) {
             
             <div class="raffle-box">
               <div class="raffle-title">🎟️ The Diaper Raffle</div>
-              <p style="margin: 0; font-size: 14px;">Bring a pack of diapers for a chance to win a prize!</p>
+              <p style="margin: 0; font-size: 14px;">Bring a pack of diapers (size one and up, please no newborn) for a chance to win a prize!</p>
             </div>
             
             <p style="text-align: center; margin-top: 30px; font-style: italic; color: #888888;">
