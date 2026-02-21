@@ -42,6 +42,10 @@ export default function Penguin({ onAnimationDone }) {
           style={{ pointerEvents: 'none' }}
         >
           <source
+            src={`${import.meta.env.BASE_URL}BeretPenguin.done.mov`}
+            type="video/quicktime"
+          />
+          <source
             src={`${import.meta.env.BASE_URL}BeretPenguin.done.webm`}
             type="video/webm"
           />
