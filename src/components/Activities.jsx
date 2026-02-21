@@ -4,8 +4,8 @@ const EclairIcon = () => (
   <motion.img
     src="/Penguineclair.png"
     alt="Sweet Treats"
-    width="80"
-    height="80"
+    width="128"
+    height="128"
     whileHover={{ rotate: 5, scale: 1.1 }}
     style={{ objectFit: 'contain' }}
   />
@@ -15,8 +15,8 @@ const DiaperIcon = () => (
   <motion.img
     src="/Penguindiaper.png"
     alt="Diaper Raffle"
-    width="80"
-    height="80"
+    width="128"
+    height="128"
     animate={{ rotate: [-2, 2, -2] }}
     transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
     style={{ objectFit: 'contain' }}
@@ -67,7 +67,7 @@ export default function Activities() {
           {/* Desserts Card */}
           <motion.div variants={cardVariants}>
             <div className="bg-white rounded-[2.5rem] p-12 md:p-14 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 hover:shadow-2xl hover:shadow-warm-gold/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
-              <div className="w-24 h-24 rounded-full bg-warm-gold/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+              <div className="w-40 h-40 rounded-full bg-warm-gold/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
                 <EclairIcon />
               </div>
 
@@ -88,7 +88,7 @@ export default function Activities() {
               <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#f8f6f2] rounded-full border border-sketch-gray/10 shadow-inner" />
               <div className="absolute -right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#f8f6f2] rounded-full border border-sketch-gray/10 shadow-inner" />
 
-              <div className="w-24 h-24 rounded-full bg-beret-blue/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
+              <div className="w-40 h-40 rounded-full bg-beret-blue/5 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500">
                 <DiaperIcon />
               </div>
 
