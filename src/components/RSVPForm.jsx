@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwQLLOJ7ndDktTi-9iXJLrzl96uY6e4dxyGSeWQFb5svsffGVkoR_f4XX4r0WCvFTOIkA/exec'
