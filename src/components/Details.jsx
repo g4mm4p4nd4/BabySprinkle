@@ -15,7 +15,7 @@ function CalendarDropdown() {
 
   const eventTitle = "Victoria's Baby Sprinkle"
   const location = "Eclair Affaire, 1150 Weston Rd, Weston, FL 33326"
-  const description = "Baby Sprinkle in honor of Victoria. Don't forget to bring diapers (size one and up, please no newborn) for the Diaper Raffle!"
+  const description = "Baby Sprinkle in honor of Victoria. Don't forget to bring diapers (size one and up) for the Diaper Raffle!"
   const startDate = "20260329T180000Z"
   const endDate = "20260329T200000Z"
 
