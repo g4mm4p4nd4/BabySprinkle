@@ -426,15 +426,11 @@ export default function RSVPForm() {
                     ) : (
                       <span className="relative flex items-center justify-center gap-4">
                         {status === 'error' ? 'Retry RSVP' : 'Send RSVP'}
-                        <motion.svg
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                        <motion.img
+                          src="/watercolor-rsvp-seal.svg"
+                          alt="Send RSVP"
+                          width="32"
+                          height="32"
                           className="group-hover:rotate-12 transition-transform duration-300"
                           animate={flyPlane ? {
                             x: [0, -10, 400],
@@ -443,10 +439,8 @@ export default function RSVPForm() {
                             opacity: [1, 1, 0]
                           } : {}}
                           transition={{ duration: 1.2, ease: "easeIn" }}
-                        >
-                          <line x1="22" y1="2" x2="11" y2="13" />
-                          <polygon points="22 2 15 22 11 13 2 9 22 2" />
-                        </motion.svg>
+                          style={{ objectFit: 'contain' }}
+                        />
                       </span>
                     )}
                   </button>

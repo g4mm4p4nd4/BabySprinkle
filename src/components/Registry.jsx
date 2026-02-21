@@ -1,24 +1,15 @@
 import { motion } from 'framer-motion'
 
 const GiftIcon = () => (
-    <motion.svg
-        width="64" height="64" viewBox="0 0 56 56" fill="none"
+    <motion.img
+        src="/watercolor-gift-box.svg"
+        alt="Baby Registry"
+        width="80"
+        height="80"
         whileHover={{ rotate: [-2, 2, -2] }}
         transition={{ duration: 0.5 }}
-    >
-        <rect x="14" y="24" width="28" height="22" rx="2" fill="#F9F9F9" stroke="#E2E8F0" strokeWidth="1.5" />
-        <path d="M10 24 L46 24" stroke="#E2E8F0" strokeWidth="1.5" />
-        <path d="M28 24 L28 46" stroke="#E2E8F0" strokeWidth="1.5" />
-        {/* Bow loops */}
-        <path d="M28 24 C 28 16, 18 16, 18 20 C 18 24, 28 24, 28 24 Z" fill="#4A74A3" opacity="0.1" stroke="#4A74A3" strokeWidth="1.5" strokeLinejoin="round" />
-        <path d="M28 24 C 28 16, 38 16, 38 20 C 38 24, 28 24, 28 24 Z" fill="#4A74A3" opacity="0.1" stroke="#4A74A3" strokeWidth="1.5" strokeLinejoin="round" />
-        {/* Bow tails */}
-        <path d="M26 24 C 24 28, 20 32, 16 34" stroke="#4A74A3" strokeWidth="1.5" strokeLinecap="round" />
-        <path d="M30 24 C 32 28, 36 32, 40 34" stroke="#4A74A3" strokeWidth="1.5" strokeLinecap="round" />
-        {/* Subtle texture dots */}
-        <circle cx="20" cy="35" r="1.2" fill="#4A74A3" opacity="0.1" />
-        <circle cx="36" cy="35" r="1.2" fill="#4A74A3" opacity="0.1" />
-    </motion.svg>
+        style={{ objectFit: 'contain' }}
+    />
 )
 
 export default function Registry() {

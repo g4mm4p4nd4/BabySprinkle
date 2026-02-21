@@ -116,6 +116,73 @@ export default function EiffelTower() {
         pencilGroup.style.opacity = '0'
         svg.appendChild(pencilGroup)
 
+        // --- Create Sparkles (Stars) ---
+        const sparklesGroup = document.createElementNS(svgNS, 'g')
+        sparklesGroup.setAttribute('id', 'eiffel-sparkles')
+
+        const NUM_SPARKLES = 20
+        let sparklesHTML = ''
+
+        // Define a 4-point star shape
+        const starPath = "M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z"
+
+        for (let i = 0; i < NUM_SPARKLES; i++) {
+          // Y distribution along the primary height of the illustration (Y ~ 200 to ~ 920)
+          const py = 200 + pr(i * 10) * 700
+
+          // Constrain width heavily to maintain the "inner glow" look
+          // The base of the tower is wider, so we allow a bit more variance near the bottom
+          const progress = (py - 150) / 770
+
+          // Extreme constraint: Max 8px variance at the top, max 45px variance at the base
+          const variance = 8 + Math.pow(progress, 2) * 37
+
+          // Center X is exactly 485 based on the original Illustrator SVG paths
+          const centerX = 485
+
+          // Randomize strictly within this highly narrow constrained variance
+          const px = centerX + (pr(i * 20) * (variance * 2)) - variance
+
+          // Scale down sparkles slightly for a more subtle integrated look
+          const scale = pr(i * 30) * 0.4 + 0.2
+          const delay = pr(i * 40) * 3 // 0 to 3s delay for CSS animation
+          const dur = pr(i * 50) * 1.5 + 1.5 // 1.5 to 3s duration
+
+          sparklesHTML += `
+            <g transform="translate(${px}, ${py}) scale(${scale})">
+              <path 
+                d="${starPath}" 
+                fill="#D4A574" 
+                style="
+                  opacity: 0; 
+                  transform-origin: 0px 0px;
+                  animation: eiffel-sparkle ${dur}s ease-in-out ${delay}s infinite alternate;
+                " 
+              />
+            </g>
+          `
+        }
+        sparklesGroup.innerHTML = sparklesHTML
+        // Initially hide sparkles until drawing is done
+        sparklesGroup.style.opacity = '0'
+        sparklesGroup.style.transition = 'opacity 2s ease-in'
+
+        // Ensure the style block exists for the animation
+        let styleTag = svg.querySelector('style')
+        if (!styleTag) {
+          styleTag = document.createElementNS(svgNS, 'style')
+          svg.appendChild(styleTag)
+        }
+        styleTag.innerHTML += `
+          @keyframes eiffel-sparkle {
+            0% { opacity: 0; transform: rotate(0deg); }
+            50% { opacity: 0.8; transform: scale(1.5) rotate(45deg); filter: drop-shadow(0 0 5px rgba(212,165,116,0.8)); }
+            100% { opacity: 0; transform: rotate(90deg); }
+          }
+        `
+
+        svg.appendChild(sparklesGroup)
+
         // --- rAF-driven animation ---
         const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3)
         const startTime = performance.now()
@@ -179,6 +246,9 @@ export default function EiffelTower() {
               contentGroup.style.transition = 'opacity 1.2s ease-out'
               contentGroup.style.opacity = '0.35'
             }
+
+            // Fade in the sparkles
+            sparklesGroup.style.opacity = '1'
           }
 
           if (!allDone && !cancelled) {

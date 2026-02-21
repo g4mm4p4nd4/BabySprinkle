@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
+import { DotLottieReact } from '@lottiefiles/dotlottie-react'
 
 export default function Penguin({ onAnimationDone }) {
   const [showStatic, setShowStatic] = useState(false)
-  const videoRef = useRef(null)
+  const dotLottieRef = useRef(null)
 
   // Listen for the parent to signal that the waddle animation is done
   useEffect(() => {
@@ -12,9 +13,9 @@ export default function Penguin({ onAnimationDone }) {
   }, [onAnimationDone])
 
   const handleSwapToStatic = () => {
-    // Pause and hide the video, show the static image
-    if (videoRef.current) {
-      videoRef.current.pause()
+    // Pause the lottie animation, show the static image
+    if (dotLottieRef.current) {
+      dotLottieRef.current.pause()
     }
     setShowStatic(true)
   }
@@ -29,27 +30,18 @@ export default function Penguin({ onAnimationDone }) {
 
   return (
     <div className="w-full h-auto relative">
-      {/* Animated WebM video — plays once during waddle, then gets replaced */}
+      {/* Animated Lottie — plays while waddling, then gets replaced */}
       {!showStatic && (
-        <video
-          ref={videoRef}
-          autoPlay
+        <DotLottieReact
+          src={`${import.meta.env.BASE_URL}PenguinLottie.lottie`}
           loop
-          muted
-          playsInline
+          autoplay
+          dotLottieRefCallback={(ref) => {
+            dotLottieRef.current = ref;
+          }}
           className="w-full h-auto drop-shadow-xl scale-[1.75] origin-bottom"
-          aria-label="Penguin wearing a blue beret walking"
           style={{ pointerEvents: 'none' }}
-        >
-          <source
-            src={`${import.meta.env.BASE_URL}BeretPenguin.done.mov`}
-            type="video/quicktime"
-          />
-          <source
-            src={`${import.meta.env.BASE_URL}BeretPenguin.done.webm`}
-            type="video/webm"
-          />
-        </video>
+        />
       )}
 
       {/* Static image — shown after waddle animation ends */}

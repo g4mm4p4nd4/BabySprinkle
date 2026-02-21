@@ -15,9 +15,11 @@
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.18.1",
     "@marsidev/react-turnstile": "^1.4.2",
     "framer-motion": "^12.34.2",
     "gh-pages": "^6.3.0",
+    "lottie-react": "^2.4.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0"

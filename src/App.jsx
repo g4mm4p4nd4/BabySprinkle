@@ -4,6 +4,7 @@ import Activities from './components/Activities'
 import RSVPForm from './components/RSVPForm'
 import Registry from './components/Registry'
 import Footer from './components/Footer'
+import WatercolorBackground from './components/WatercolorBackground'
 import { useEffect, useState } from 'react'
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-paper-white selection:bg-beret-blue selection:text-white">
+    <div className="min-h-screen bg-paper-white selection:bg-beret-blue selection:text-white relative z-0">
+      <WatercolorBackground />
       {/* Sticky nav for quick RSVP access */}
       <nav
         className={`fixed top-0 right-0 left-0 z-50 p-4 flex justify-end transition-all duration-500 pointer-events-none

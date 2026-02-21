@@ -1,0 +1,48 @@
+<svg id="gift-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+                        <defs>
+                            <filter id="watercolor-blur" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="8" result="blur"/>
+                                <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" result="noise"/>
+                                <feDisplacementMap in="blur" in2="noise" scale="15" xChannelSelector="R" yChannelSelector="G"/>
+                            </filter>
+                            <filter id="box-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#3d5a40" flood-opacity="0.12"/>
+                            </filter>
+                            <filter id="ribbon-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.1"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Watercolor Background Splashes -->
+                        <circle cx="60" cy="70" r="40" fill="#a8cbea" opacity="0.6" filter="url(#watercolor-blur)"/>
+                        <circle cx="100" cy="90" r="35" fill="#fcf0b3" opacity="0.5" filter="url(#watercolor-blur)"/>
+                        <circle cx="80" cy="110" r="25" fill="#b9d9a8" opacity="0.6" filter="url(#watercolor-blur)"/>
+
+                        <g filter="url(#box-shadow)">
+                            <!-- 3D Isometric Box Structure -->
+                            <path d="M 80 80 L 120 65 L 120 105 L 80 120 Z" fill="#b0c8de"/> <!-- Right (Dark) -->
+                            <path d="M 40 65 L 80 80 L 80 120 L 40 105 Z" fill="#d2e3f0"/> <!-- Left (Mid) -->
+                            <path d="M 80 50 L 120 65 L 80 80 L 40 65 Z" fill="#eaf3fa"/> <!-- Top (Light) -->
+
+                            <!-- Yellow Ribbons wrapped around the box -->
+                            <path d="M 95 74.5 L 105 70.5 L 105 110.5 L 95 114.5 Z" fill="#ebc54e"/> <!-- Right ribbon -->
+                            <path d="M 55 70.5 L 65 74.5 L 65 114.5 L 55 110.5 Z" fill="#fcdb6d"/> <!-- Left ribbon -->
+                            <path d="M 60 57.5 L 70 61.5 L 60 72.5 L 50 68.5 Z" fill="#fae89d"/> <!-- Top Left -->
+                            <path d="M 100 57.5 L 90 61.5 L 100 72.5 L 110 68.5 Z" fill="#f5d576"/> <!-- Top Right -->
+
+                            <!-- Elegant Ribbon Bow Loops with shadow -->
+                            <path d="M 80 65 C 50 35, 30 70, 75 68" fill="none" stroke="#fcdb6d" stroke-width="8" stroke-linecap="round" filter="url(#ribbon-shadow)"/>
+                            <path d="M 80 65 C 110 35, 130 70, 85 68" fill="none" stroke="#ebc54e" stroke-width="8" stroke-linecap="round" filter="url(#ribbon-shadow)"/>
+                            <ellipse cx="80" cy="65" rx="7" ry="5" fill="#d4aa33" transform="rotate(-15 80 65)"/>
+                        </g>
+
+                        <!-- Delicate Pencil Sketch Outlines -->
+                        <g fill="none" stroke="#4a5054" stroke-width="0.8" opacity="0.7">
+                            <path d="M 39 65 L 81 81 L 81 121 L 39 105 Z" stroke-dasharray="80 2"/>
+                            <path d="M 79 81 L 121 65 L 121 105 L 79 121 Z"/>
+                            <path d="M 79 50 L 121 65 L 79 81 L 39 65 Z" stroke-dasharray="100 3"/>
+                            <path d="M 54 71 L 54 111 M 66 75 L 66 115 M 94 74 L 94 114 M 106 70 L 106 110"/>
+                            <path d="M 80 66 C 50 36, 30 71, 75 69"/>
+                            <path d="M 80 66 C 110 36, 130 71, 85 69"/>
+                        </g>
+                    </svg>

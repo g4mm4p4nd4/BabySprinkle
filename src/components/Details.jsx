@@ -153,10 +153,7 @@ export default function Details() {
           <motion.div variants={cardVariants} className="h-full">
             <div className="bg-white rounded-[2.5rem] p-12 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 hover:shadow-2xl hover:shadow-beret-blue/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
               <div className="w-20 h-20 rounded-full bg-warm-gold/5 flex items-center justify-center mb-8 text-warm-gold group-hover:scale-110 transition-transform duration-500">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 6L12 12L16 14" />
-                </svg>
+                <img src="/watercolor-clock.svg" alt="Clock" className="w-16 h-16 object-contain" />
               </div>
 
               <h3 className="font-playfair text-3xl text-charcoal mb-6">When</h3>
@@ -178,10 +175,7 @@ export default function Details() {
           <motion.div variants={cardVariants} className="h-full">
             <div className="bg-white rounded-[2.5rem] p-12 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 hover:shadow-2xl hover:shadow-sage/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
               <div className="w-20 h-20 rounded-full bg-sage/5 flex items-center justify-center mb-8 text-sage group-hover:scale-110 transition-transform duration-500">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
+                <img src="/watercolor-map-pin.svg" alt="Map Pin" className="w-16 h-16 object-contain" />
               </div>
 
               <h3 className="font-playfair text-3xl text-charcoal mb-6">Where</h3>
