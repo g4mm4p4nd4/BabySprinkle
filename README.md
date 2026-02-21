@@ -25,3 +25,40 @@ If you are developing a production application, we recommend using TypeScript wi
 Current baseline from this update:
 - Before scope/ignore fixes (`eslint .`): **418 problems** (414 errors, 4 warnings).
 - After scope/ignore fixes (`npm run lint`): **0 problems** (0 errors, 0 warnings).
+
+## RSVP Form Configuration
+
+The RSVP form submits data to a Google Apps Script endpoint. To keep this endpoint secure and separate from the source code, it's provided as an environment variable (`VITE_RSVP_ENDPOINT`).
+
+### Local Development
+
+1. Copy `.env.example` to `.env.local`:
+   ```bash
+   cp .env.example .env.local
+   ```
+2. Update `.env.local` to include your specific Google Apps Script URL:
+   ```env
+   VITE_RSVP_ENDPOINT=https://script.google.com/macros/s/.../exec
+   ```
+
+### GitHub Pages Deployment
+
+To deploy this application via GitHub Actions and ensure the RSVP form works in production:
+
+1. Go to your GitHub repository **Settings** > **Secrets and variables** > **Actions**.
+2. Under **Variables** (or Secrets if preferred), click **New repository variable**.
+3. Name: `VITE_RSVP_ENDPOINT`
+4. Value: Your Google Apps Script deployment URL.
+5. In your GitHub Actions deployment workflow (e.g., `.github/workflows/deploy.yml`), ensure you pass the variable to the build step:
+   ```yaml
+   env:
+     VITE_RSVP_ENDPOINT: ${{ vars.VITE_RSVP_ENDPOINT }}
+   ```
+
+### Endpoint Rotation Procedure
+
+If you need to change the RSVP destination (e.g., to a new spreadsheet or script):
+
+1. **Deploy New Script**: In your new Google Apps Script project, go to **Deploy** > **New deployment** (Web app) and copy the new URL.
+2. **Update GitHub Variable**: Go to your repository settings and update the value of the `VITE_RSVP_ENDPOINT` variable.
+3. **Trigger Deployment**: Re-run your GitHub Actions deployment workflow. The new URL will be baked into the static build. No component code changes are required!
