@@ -1,12 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getEnvConfig } from '../config/env'
+import { Turnstile } from '@marsidev/react-turnstile'
 
 export default function RSVPForm() {
   const { rsvpEndpoint, isProd, isValidRsvpEndpoint } = getEnvConfig()
   const [status, setStatus] = useState('idle') // 'idle' | 'validating' | 'sending' | 'success' | 'error'
   const [errorMessage, setErrorMessage] = useState('')
   const [flyPlane, setFlyPlane] = useState(false)
+
+  const [mountTime, setMountTime] = useState(0)
+  const [turnstileToken, setTurnstileToken] = useState('')
+
+  useEffect(() => {
+    setMountTime(Date.now())
+  }, [])
 
   const trackRSVPEvent = (eventName, data = {}) => {
     console.log(`[RSVP Analytics] ${eventName}`, data)
@@ -21,16 +29,48 @@ export default function RSVPForm() {
     guests: '1',
     dietary: '',
     message: '',
+    website: '', // honeypot
   })
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    // Input normalization and max lengths
+    let newValue = value
+    if (name === 'name') newValue = value.slice(0, 100)
+    if (name === 'email') newValue = value.slice(0, 255)
+    if (name === 'dietary') newValue = value.slice(0, 200)
+    if (name === 'message') newValue = value.slice(0, 500)
+
+    setForm({ ...form, [name]: newValue })
     if (status === 'error') setStatus('idle')
     setErrorMessage('')
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    // 1. Honeypot check - reject silently
+    if (form.website) {
+      console.warn('Bot detected via honeypot')
+      return
+    }
+
+    // 2. Minimum submit time check (3 seconds)
+    if (Date.now() - mountTime < 3000) {
+      setErrorMessage('Please take a moment to read the form before submitting.')
+      setStatus('error')
+      trackRSVPEvent('error', { reason: 'submit_too_fast' })
+      return
+    }
+
+    // 3. Turnstile check
+    const turnstileKey = import.meta.env.VITE_TURNSTILE_SITE_KEY
+    if (!turnstileToken && (isProd || turnstileKey)) {
+      setErrorMessage('Please complete the security check.')
+      setStatus('error')
+      trackRSVPEvent('error', { reason: 'turnstile_missing' })
+      return
+    }
 
     if (status === 'sending') return
 
@@ -47,11 +87,39 @@ export default function RSVPForm() {
       return
     }
 
+    // 4. Per-session cooldown and duplicate suppression
+    const payloadString = JSON.stringify(form)
+    const lastSubmitTime = localStorage.getItem('rsvp_last_submit_time')
+    const lastSubmitPayload = localStorage.getItem('rsvp_last_payload')
+
+    if (lastSubmitTime && Date.now() - parseInt(lastSubmitTime) < 60000) {
+      setErrorMessage('Please wait a minute before submitting again.')
+      setStatus('error')
+      trackRSVPEvent('error', { reason: 'rate_limited_client' })
+      return
+    }
+
+    if (lastSubmitPayload === payloadString) {
+      setErrorMessage('This exact RSVP has already been submitted.')
+      setStatus('error')
+      trackRSVPEvent('error', { reason: 'duplicate_payload' })
+      return
+    }
+
     setStatus('sending')
     setFlyPlane(true)
 
     try {
-      const urlEncodedData = new URLSearchParams(form).toString()
+      // Normalizing strings
+      const normalizedForm = {
+        ...form,
+        name: form.name.trim(),
+        email: form.email.trim().toLowerCase(),
+        dietary: form.dietary.trim(),
+        message: form.message.trim(),
+        'cf-turnstile-response': turnstileToken
+      }
+      const urlEncodedData = new URLSearchParams(normalizedForm).toString()
 
       if (isValidRsvpEndpoint) {
         await fetch(rsvpEndpoint, {
@@ -68,6 +136,8 @@ export default function RSVPForm() {
 
       trackRSVPEvent('sent')
       setStatus('success')
+      localStorage.setItem('rsvp_last_submit_time', Date.now().toString())
+      localStorage.setItem('rsvp_last_payload', payloadString)
     } catch (err) {
       console.error('RSVP Submission Error:', err)
       setErrorMessage('Network error. Please check your connection and try again.')
@@ -179,6 +249,18 @@ export default function RSVPForm() {
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-beret-blue via-sage to-warm-gold opacity-60" />
 
                 <div className="space-y-8">
+                  {/* Honeypot */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    value={form.website}
+                    onChange={handleChange}
+                    className="absolute opacity-0 -z-10 w-0 h-0"
+                    aria-hidden="true"
+                  />
+
                   {/* Name */}
                   <div className="relative group">
                     <label htmlFor="name" className={labelClasses}>
@@ -271,6 +353,27 @@ export default function RSVPForm() {
                     />
                   </div>
                 </div>
+
+                {/* Cloudflare Turnstile */}
+                {(isProd || import.meta.env.VITE_TURNSTILE_SITE_KEY) && (
+                  <div className="flex justify-center mt-8">
+                    <Turnstile
+                      siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA'}
+                      onSuccess={(token) => {
+                        setTurnstileToken(token)
+                        if (status === 'error') setStatus('idle')
+                        setErrorMessage('')
+                      }}
+                      onError={() => {
+                        setErrorMessage('Security check failed. Please try again.')
+                        setStatus('error')
+                      }}
+                      options={{
+                        theme: 'light'
+                      }}
+                    />
+                  </div>
+                )}
 
                 {/* Error State */}
                 <AnimatePresence>
