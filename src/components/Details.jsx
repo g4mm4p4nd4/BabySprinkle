@@ -176,11 +176,6 @@ export default function Details() {
                 <p className="text-2xl font-bold text-beret-blue">Eclair Affaire</p>
                 <p className="text-lg text-charcoal">1150 Weston Rd</p>
                 <p className="text-lg text-charcoal">Weston, FL 33326</p>
-                <div className="mt-4">
-                  <span className="text-[10px] font-bold text-sage uppercase tracking-[0.2em] bg-sage/5 px-4 py-1.5 rounded-full border border-sage/10">
-                    Valet & Self-Parking
-                  </span>
-                </div>
               </div>
 
               <div className="w-full pt-6 border-t border-sketch-gray/5">
