@@ -1,0 +1,64 @@
+<svg id="raffle-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="100%" height="100%">
+                        <defs>
+                            <filter id="raffle-blur" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="7" result="blur"/>
+                                <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="3" result="noise"/>
+                                <feDisplacementMap in="blur" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G"/>
+                            </filter>
+                            <filter id="ticket-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="2" dy="8" stdDeviation="5" flood-color="#3d5a40" flood-opacity="0.15"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Watercolor Background Splashes -->
+                        <circle cx="90" cy="70" r="40" fill="#a8cbea" opacity="0.5" filter="url(#raffle-blur)"/>
+                        <circle cx="50" cy="100" r="30" fill="#fcf0b3" opacity="0.6" filter="url(#raffle-blur)"/>
+                        <circle cx="110" cy="110" r="35" fill="#b9d9a8" opacity="0.5" filter="url(#raffle-blur)"/>
+
+                        <!-- Back Ticket (Tilted Right) -->
+                        <g filter="url(#ticket-shadow)" transform="translate(15, -10) rotate(15, 80, 80)">
+                            <!-- Ticket Cutout Base -->
+                            <path d="M 25 50 L 135 50 L 135 71 A 7 7 0 0 0 135 85 L 135 106 L 25 106 L 25 85 A 7 7 0 0 0 25 71 Z" fill="#eaf3fa"/>
+                            <!-- Subtle border -->
+                            <path d="M 30 55 L 130 55 L 130 73.5 A 4.5 4.5 0 0 0 130 82.5 L 130 101 L 30 101 L 30 82.5 A 4.5 4.5 0 0 0 30 73.5 Z" fill="none" stroke="#a8cbea" stroke-width="1.5"/>
+                            <!-- Faded text -->
+                            <text x="80" y="83" font-family="Georgia, serif" font-size="16" font-weight="bold" fill="#8cb091" text-anchor="middle" letter-spacing="4" opacity="0.5">TICKET</text>
+                        </g>
+
+                        <!-- Front Ticket (Tilted Left) -->
+                        <g filter="url(#ticket-shadow)" transform="translate(-5, 15) rotate(-8, 80, 80)">
+                            <!-- Ticket Cutout Base -->
+                            <path d="M 25 50 L 135 50 L 135 71 A 7 7 0 0 0 135 85 L 135 106 L 25 106 L 25 85 A 7 7 0 0 0 25 71 Z" fill="#ffffff"/>
+                            
+                            <!-- Inner Gold Elegant Rim -->
+                            <path d="M 29 54 L 131 54 L 131 72.5 A 5.5 5.5 0 0 0 131 83.5 L 131 102 L 29 102 L 29 83.5 A 5.5 5.5 0 0 0 29 72.5 Z" fill="none" stroke="#d4aa33" stroke-width="1.5" opacity="0.7"/>
+                            <path d="M 32 57 L 128 57 L 128 74 A 4 4 0 0 0 128 82 L 128 99 L 32 99 L 32 82 A 4 4 0 0 0 32 74 Z" fill="none" stroke="#ebc54e" stroke-width="0.8" stroke-dasharray="3 2" opacity="0.8"/>
+                            
+                            <!-- Side Stub Perforations -->
+                            <path d="M 45 51 L 45 105 M 115 51 L 115 105" stroke="#d4aa33" stroke-width="1" stroke-dasharray="2 2" opacity="0.6"/>
+
+                            <!-- Faint Eiffel Tower Watermark -->
+                            <path d="M 79 55 L 81 55 L 82 63 L 84 63 L 84 65 L 82 65 L 85 85 L 81 85 L 80 80 L 79 85 L 75 85 L 78 65 L 76 65 L 76 63 L 78 63 Z M 79 61 L 81 61 M 78 69 L 82 69 M 77 76 L 83 76 M 76 82 L 84 82" fill="none" stroke="#fcdb6d" stroke-width="1" opacity="0.4"/>
+
+                            <!-- Main Typography -->
+                            <text x="80" y="73" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#3D5A40" text-anchor="middle" letter-spacing="3">DIAPER</text>
+                            <text x="80" y="91" font-family="Georgia, serif" font-size="13" font-weight="bold" fill="#3D5A40" text-anchor="middle" letter-spacing="3">RAFFLE</text>
+                            
+                            <!-- Event Date serial numbers (03-29) -->
+                            <text x="35" y="80" font-family="sans-serif" font-size="6" fill="#4a5054" font-weight="bold" transform="rotate(-90 35 80)" letter-spacing="1">No. 0329</text>
+                            <text x="125" y="80" font-family="sans-serif" font-size="6" fill="#4a5054" font-weight="bold" transform="rotate(-90 125 80)" letter-spacing="1">No. 0329</text>
+                        </g>
+
+                        <!-- Delicate Sketch Outlines Overlay -->
+                        <g fill="none" stroke="#4a5054" stroke-width="0.7" opacity="0.6" stroke-linecap="round">
+                            <!-- Back ticket sketch line -->
+                            <g transform="translate(15, -10) rotate(15, 80, 80)">
+                                <path d="M 25 50 L 135 50 L 135 71 A 7 7 0 0 0 135 85 L 135 106 L 25 106 L 25 85 A 7 7 0 0 0 25 71 Z" stroke-dasharray="100 3 15 5"/>
+                            </g>
+                            <!-- Front ticket sketch line -->
+                            <g transform="translate(-5, 15) rotate(-8, 80, 80)">
+                                <path d="M 25 50 L 135 50 L 135 71 A 7 7 0 0 0 135 85 L 135 106 L 25 106 L 25 85 A 7 7 0 0 0 25 71 Z" stroke-dasharray="80 5 20 2"/>
+                                <path d="M 45 50 L 45 106 M 115 50 L 115 106" stroke-dasharray="10 4 20 2"/>
+                            </g>
+                        </g>
+                    </svg>

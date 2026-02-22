@@ -1,22 +1,40 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Victoria's Baby Sprinkle | March 29, 2026</title>
-    <meta name="description" content="Join us for a Parisian Baby Sprinkle in honor of Victoria. Sunday, March 29, 2026 at Eclair Affaire." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
-    <script type="module" crossorigin src="/assets/index-CDPyVE6W.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/react-vendor-BkYWBGzo.js">
-    <link rel="modulepreload" crossorigin href="/assets/lottie-VLR_OLTU.js">
-    <link rel="modulepreload" crossorigin href="/assets/framer-BXI-dkl6.js">
-    <link rel="modulepreload" crossorigin href="/assets/turnstile-0wGuTpFV.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-CO4OtwUw.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>Victoria's Baby Sprinkle | March 29, 2026</title>
+  <meta name="description"
+    content="Join us for a Parisian Baby Sprinkle in honor of Victoria. Sunday, March 29, 2026 at Eclair Affaire." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-Lrp9273M.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/react-vendor-BkYWBGzo.js">
+  <link rel="modulepreload" crossorigin href="/assets/lottie-VLR_OLTU.js">
+  <link rel="modulepreload" crossorigin href="/assets/framer-BXI-dkl6.js">
+  <link rel="modulepreload" crossorigin href="/assets/turnstile-0wGuTpFV.js">
+  <link rel="stylesheet" crossorigin href="/assets/index-CeQs3t88.css">
+</head>
+
+<body>
+  <!-- Inline script to prevent FOUC (Flash of Unstyled Content) -->
+  <script>
+    (function () {
+      try {
+        var localTheme = localStorage.getItem('theme');
+        var isDark = localTheme === 'dark' || (!localTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) { }
+    })();
+  </script>
+  <div id="root"></div>
+</body>
+
 </html>
