@@ -1,13 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#F9F9F9"/>
-  <ellipse cx="32" cy="38" rx="16" ry="18" fill="#2d2d2d" opacity="0.9"/>
-  <ellipse cx="32" cy="40" rx="10" ry="14" fill="white" opacity="0.95"/>
-  <circle cx="32" cy="22" r="12" fill="#2d2d2d" opacity="0.92"/>
-  <ellipse cx="32" cy="24" rx="7" ry="6" fill="white" opacity="0.9"/>
-  <circle cx="28" cy="22" r="1.8" fill="#2d2d2d"/>
-  <circle cx="36" cy="22" r="1.8" fill="#2d2d2d"/>
-  <path d="M30 27 L32 30 L34 27 Z" fill="#E8963E"/>
-  <ellipse cx="32" cy="14" rx="11" ry="3.5" fill="#4A74A3"/>
-  <path d="M22 14 C 22 7, 32 4, 34 5 C 38 6, 42 10, 42 14" fill="#4A74A3"/>
-  <circle cx="33" cy="6" r="1.5" fill="#4A74A3"/>
-</svg>
+<?xml version="1.0" standalone="no"?>
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" id="favicon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full drop-shadow-md">
+                        <defs>
+                            <!-- Gradients -->
+                            <linearGradient id="bgDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#283a4f"/>
+                                <stop offset="100%" stop-color="#182330"/>
+                            </linearGradient>
+                            
+                            <linearGradient id="frontWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stop-color="#ffffff"/>
+                                <stop offset="80%" stop-color="#f8fafc"/>
+                                <stop offset="100%" stop-color="#e2e8f0"/>
+                            </linearGradient>
+
+                            <radialGradient id="yellowWash" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#fde047" stop-opacity="0.95"/>
+                                <stop offset="50%" stop-color="#fef08a" stop-opacity="0.6"/>
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                            </radialGradient>
+
+                            <radialGradient id="blueWash" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.8"/>
+                                <stop offset="60%" stop-color="#bfdbfe" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                            </radialGradient>
+                        </defs>
+
+                        <!-- 1. Background Grass / Splatters -->
+                        <ellipse cx="100" cy="180" rx="75" ry="12" fill="#a3e635" opacity="0.6"/>
+                        <ellipse cx="130" cy="182" rx="50" ry="8" fill="#4ade80" opacity="0.5"/>
+                        <ellipse cx="70" cy="178" rx="45" ry="9" fill="#22c55e" opacity="0.4"/>
+                        <circle cx="45" cy="175" r="3" fill="#f472b6"/>
+                        <circle cx="52" cy="170" r="2" fill="#ffffff"/>
+                        <circle cx="155" cy="178" r="2.5" fill="#fde047"/>
+                        <circle cx="148" cy="182" r="1.5" fill="#f472b6"/>
+
+                        <!-- 2. Side Flippers (Behind the main body slightly) -->
+                        <!-- Left Flipper -->
+                        <path d="M 45 100 C 15 125 20 165 30 170 C 40 175 55 145 60 115 Z" fill="url(#bgDark)"/>
+                        <!-- Right Flipper -->
+                        <path d="M 155 100 C 185 125 180 165 170 170 C 160 175 145 145 140 115 Z" fill="url(#bgDark)"/>
+
+                        <!-- 3. Feet (Bright Orange Claws) -->
+                        <path d="M 85 178 L 70 185 L 75 188 L 80 186 L 85 190 L 90 185 Z" fill="#ea580c"/>
+                        <path d="M 115 178 L 130 185 L 125 188 L 120 186 L 115 190 L 110 185 Z" fill="#ea580c"/>
+
+                        <!-- 4. Main Dark Cape / Silhouette -->
+                        <path d="M 100 45 C 145 45 165 75 160 130 C 155 180 140 188 100 188 C 60 188 45 180 40 130 C 35 75 55 45 100 45 Z" fill="url(#bgDark)"/>
+
+                        <!-- 5. Continuous White Front (Face + Fluffy Belly) -->
+                        <path d="M 100 50 C 120 35 145 50 135 80 C 130 95 145 115 145 150 C 145 180 125 186 100 186 C 75 186 55 180 55 150 C 55 115 70 95 65 80 C 55 50 80 35 100 50 Z" fill="url(#frontWhite)"/>
+
+                        <!-- 6. Watercolor Chest Washes (Yellow & Blue) -->
+                        <!-- Large yellow chest -->
+                        <ellipse cx="100" cy="115" rx="45" ry="40" fill="url(#yellowWash)"/>
+                        <!-- Soft blue bottom belly -->
+                        <ellipse cx="100" cy="165" rx="35" ry="25" fill="url(#blueWash)"/>
+
+                        <!-- 7. Blush/Cheeks -->
+                        <circle cx="70" cy="85" r="8" fill="#f472b6" opacity="0.55"/>
+                        <circle cx="130" cy="85" r="8" fill="#f472b6" opacity="0.55"/>
+
+                        <!-- 8. Expressive Eyes (Guaranteed visibility) -->
+                        <g id="eyes">
+                            <!-- Left Eye -->
+                            <circle cx="78" cy="74" r="8" fill="#111827"/>
+                            <circle cx="75" cy="70" r="3" fill="#ffffff"/> <!-- Primary catchlight -->
+                            <circle cx="81" cy="76" r="1.5" fill="#ffffff"/> <!-- Secondary catchlight -->
+                            
+                            <!-- Right Eye -->
+                            <circle cx="122" cy="74" r="8" fill="#111827"/>
+                            <circle cx="119" cy="70" r="3" fill="#ffffff"/> <!-- Primary catchlight -->
+                            <circle cx="125" cy="76" r="1.5" fill="#ffffff"/> <!-- Secondary catchlight -->
+                        </g>
+
+                        <!-- 9. Beak (With sharp dark strokes to separate from the white face) -->
+                        <g id="beak">
+                            <!-- Top half of beak -->
+                            <polygon points="90,84 100,77 110,84 100,87" fill="#fbbf24" stroke="#451a03" stroke-width="1.5" stroke-linejoin="round"/>
+                            <!-- Bottom half of beak -->
+                            <polygon points="90,84 100,87 110,84 100,92" fill="#d97706" stroke="#451a03" stroke-width="1.5" stroke-linejoin="round"/>
+                        </g>
+
+                        <!-- 10. The Beret (Layered, overlapping the face/eyes perfectly) -->
+                        <g id="beret">
+                            <!-- Base shadow layer -->
+                            <path d="M 40 45 C 30 15 80 -5 115 5 C 160 15 165 45 150 60 C 130 80 60 70 40 45 Z" fill="#2563eb"/>
+                            <!-- Main mid-tone puff -->
+                            <path d="M 48 40 C 40 15 85 5 115 10 C 150 15 155 45 140 55 C 120 70 65 60 48 40 Z" fill="#60a5fa"/>
+                            <!-- Highlight puff -->
+                            <path d="M 60 35 C 60 15 95 10 120 15 C 145 20 145 45 130 50 C 110 60 70 55 60 35 Z" fill="#93c5fd"/>
+                            <!-- Beret texture lines -->
+                            <path d="M 75 25 C 85 15 110 20 125 35" stroke="#3b82f6" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.6"/>
+                            <path d="M 65 45 C 80 35 100 35 110 45" stroke="#2563eb" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.4"/>
+                            <!-- The little top nub -->
+                            <path d="M 98 12 L 102 4 L 106 12 Z" fill="#1e3a8a"/>
+                        </g>
+
+                    </svg>
