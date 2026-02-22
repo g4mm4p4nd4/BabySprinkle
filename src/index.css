@@ -14,7 +14,14 @@
   --font-playfair: "Playfair Display", Georgia, serif;
   --font-lato: "Lato", "Helvetica Neue", sans-serif;
   --font-script: "Dancing Script", cursive;
+
+  /* Dark Mode Palette */
+  --color-dark-bg: #1A1C1E;
+  --color-dark-card: #242628;
+  --color-dark-border: #333333;
 }
+
+@custom-variant dark (&:where(.dark, .dark *));
 
 body {
   font-family: var(--font-lato);

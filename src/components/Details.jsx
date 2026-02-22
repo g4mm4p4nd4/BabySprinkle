@@ -55,7 +55,7 @@ function CalendarDropdown() {
         className={`
           flex items-center gap-2 px-6 py-2.5 rounded-full border-2 
           font-bold text-xs uppercase tracking-widest transition-all duration-300
-          ${open ? 'bg-beret-blue text-white border-beret-blue' : 'bg-transparent text-beret-blue border-beret-blue/20 hover:border-beret-blue hover:bg-beret-blue/5'}
+          ${open ? 'bg-beret-blue text-white border-beret-blue' : 'bg-transparent text-beret-blue dark:text-beret-blue-light border-beret-blue/20 hover:border-beret-blue hover:bg-beret-blue/5'}
           cursor-pointer
         `}
       >
@@ -81,13 +81,13 @@ function CalendarDropdown() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full mb-2 left-0 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-sketch-gray/10 py-3 z-50 origin-top-left overflow-hidden"
+            className="absolute top-full mb-2 left-0 mt-3 w-56 bg-white dark:bg-dark-card rounded-2xl shadow-2xl border border-sketch-gray/10 py-3 z-50 origin-top-left overflow-hidden"
           >
             <a
               href={googleUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 px-4 py-3 hover:bg-paper-white transition-colors text-charcoal text-sm group"
+              className="flex items-center gap-3 px-4 py-3 hover:bg-paper-white dark:hover:bg-dark-bg transition-colors text-charcoal dark:text-paper-cream text-sm group"
               onClick={() => setOpen(false)}
             >
               <span className="w-8 h-8 rounded-lg bg-red-50 text-red-500 flex items-center justify-center font-bold text-xs group-hover:bg-red-100 transition-colors">G</span>
@@ -95,14 +95,14 @@ function CalendarDropdown() {
             </a>
             <button
               onClick={downloadICS}
-              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-paper-white transition-colors text-charcoal text-sm cursor-pointer group"
+              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-paper-white dark:hover:bg-dark-bg transition-colors text-charcoal dark:text-paper-cream text-sm cursor-pointer group"
             >
               <span className="w-8 h-8 rounded-lg bg-gray-100 text-gray-800 flex items-center justify-center font-bold text-xs group-hover:bg-gray-200 transition-colors"></span>
               Apple Calendar
             </button>
             <button
               onClick={downloadICS}
-              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-paper-white transition-colors text-charcoal text-sm cursor-pointer group"
+              className="w-full flex items-center gap-3 px-4 py-3 hover:bg-paper-white dark:hover:bg-dark-bg transition-colors text-charcoal dark:text-paper-cream text-sm cursor-pointer group"
             >
               <span className="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center font-bold text-xs group-hover:bg-blue-100 transition-colors">O</span>
               Outlook
@@ -143,26 +143,26 @@ export default function Details() {
       >
         {/* Header */}
         <motion.div variants={cardVariants} className="text-center mb-20">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-sketch-gray mb-4 font-bold">The Logistics</p>
-          <h2 className="font-playfair text-5xl md:text-6xl text-beret-blue">When & Where</h2>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-sketch-gray dark:text-sketch-gray/80 mb-4 font-bold">The Logistics</p>
+          <h2 className="font-playfair text-5xl md:text-6xl text-beret-blue dark:text-beret-blue-light">When & Where</h2>
           <div className="mt-8 mx-auto w-24 h-px bg-gradient-to-r from-transparent via-warm-gold to-transparent" />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start">
           {/* WHEN CARD */}
           <motion.div variants={cardVariants} className="h-full">
-            <div className="bg-white rounded-[2.5rem] p-12 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 hover:shadow-2xl hover:shadow-beret-blue/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
+            <div className="bg-white dark:bg-dark-card rounded-[2.5rem] p-12 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 dark:border-dark-border hover:shadow-2xl hover:shadow-beret-blue/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
               <div className="w-20 h-20 rounded-full bg-warm-gold/5 flex items-center justify-center mb-8 text-warm-gold group-hover:scale-110 transition-transform duration-500">
                 <img src="/watercolor-clock.svg" alt="Clock" className="w-16 h-16 object-contain" />
               </div>
 
-              <h3 className="font-playfair text-3xl text-charcoal mb-6">When</h3>
+              <h3 className="font-playfair text-3xl text-charcoal dark:text-paper-cream mb-6">When</h3>
 
               <div className="space-y-4 mb-10 flex-grow">
-                <p className="text-2xl font-bold text-beret-blue">Sunday, March 29, 2026</p>
+                <p className="text-2xl font-bold text-beret-blue dark:text-beret-blue-light">Sunday, March 29, 2026</p>
                 <div className="w-12 h-px bg-warm-gold/20 mx-auto" />
-                <p className="text-xl text-charcoal font-medium">2:00 PM – 4:00 PM</p>
-                <p className="text-sm text-sketch-gray italic font-light tracking-wide">Afternoon Tea & Eclairs</p>
+                <p className="text-xl text-charcoal dark:text-paper-cream font-medium">2:00 PM – 4:00 PM</p>
+                <p className="text-sm text-sketch-gray dark:text-sketch-gray/80 italic font-light tracking-wide">Afternoon Tea & Eclairs</p>
               </div>
 
               <div className="w-full pt-6 border-t border-sketch-gray/5">
@@ -173,17 +173,17 @@ export default function Details() {
 
           {/* WHERE CARD */}
           <motion.div variants={cardVariants} className="h-full">
-            <div className="bg-white rounded-[2.5rem] p-12 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 hover:shadow-2xl hover:shadow-sage/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
+            <div className="bg-white dark:bg-dark-card rounded-[2.5rem] p-12 shadow-xl shadow-sketch-gray/5 border border-sketch-gray/10 dark:border-dark-border hover:shadow-2xl hover:shadow-sage/5 transition-all duration-700 h-full flex flex-col items-center text-center group">
               <div className="w-20 h-20 rounded-full bg-sage/5 flex items-center justify-center mb-8 text-sage group-hover:scale-110 transition-transform duration-500">
                 <img src="/watercolor-map-pin.svg" alt="Map Pin" className="w-16 h-16 object-contain" />
               </div>
 
-              <h3 className="font-playfair text-3xl text-charcoal mb-6">Where</h3>
+              <h3 className="font-playfair text-3xl text-charcoal dark:text-paper-cream mb-6">Where</h3>
 
               <div className="space-y-2 mb-10 flex-grow">
-                <p className="text-2xl font-bold text-beret-blue">Eclair Affaire</p>
-                <p className="text-lg text-charcoal">1150 Weston Rd</p>
-                <p className="text-lg text-charcoal">Weston, FL 33326</p>
+                <p className="text-2xl font-bold text-beret-blue dark:text-beret-blue-light">Eclair Affaire</p>
+                <p className="text-lg text-charcoal dark:text-paper-cream">1150 Weston Rd</p>
+                <p className="text-lg text-charcoal dark:text-paper-cream">Weston, FL 33326</p>
               </div>
 
               <div className="w-full pt-6 border-t border-sketch-gray/5">
@@ -207,7 +207,7 @@ export default function Details() {
         {/* Map Embed with better styling */}
         <motion.div
           variants={cardVariants}
-          className="mt-20 rounded-[3rem] overflow-hidden shadow-2xl shadow-sketch-gray/10 border-8 border-white transition-transform hover:scale-[1.005] duration-700 relative group"
+          className="mt-20 rounded-[3rem] overflow-hidden shadow-2xl shadow-sketch-gray/10 border-8 border-white dark:border-dark-card transition-transform hover:scale-[1.005] duration-700 relative group"
         >
           <iframe
             title="Eclair Affaire Location"

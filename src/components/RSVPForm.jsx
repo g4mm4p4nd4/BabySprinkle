@@ -148,13 +148,13 @@ export default function RSVPForm() {
   }
 
   const inputClasses = `
-    w-full px-6 py-4 rounded-2xl border-2 border-sketch-gray/10 bg-white
-    text-charcoal placeholder-sketch-gray/40 font-lato
-    focus:outline-none focus:border-sage/50 focus:ring-8 focus:ring-sage/5
+    w-full px-6 py-4 rounded-2xl border-2 border-sketch-gray/10 dark:border-dark-border bg-white dark:bg-dark-bg
+    text-charcoal dark:text-paper-cream placeholder-sketch-gray/40 dark:placeholder-sketch-gray/60 font-lato
+    focus:outline-none focus:border-sage/50 dark:focus:border-sage-light focus:ring-8 focus:ring-sage/5 dark:focus:ring-sage/10
     transition-all duration-300 text-base shadow-sm
   `
 
-  const labelClasses = "block text-[10px] font-bold text-sketch-gray mb-2 uppercase tracking-[0.2em] ml-2"
+  const labelClasses = "block text-[10px] font-bold text-sketch-gray dark:text-sketch-gray/80 mb-2 uppercase tracking-[0.2em] ml-2"
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -184,11 +184,11 @@ export default function RSVPForm() {
       >
         {/* Header */}
         <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-sketch-gray mb-4 font-bold">Répondez s'il vous plaît</p>
-          <h2 className="font-playfair text-5xl md:text-6xl text-beret-blue">Join the Celebration</h2>
+          <p className="text-[10px] uppercase tracking-[0.4em] text-sketch-gray dark:text-sketch-gray/80 mb-4 font-bold">Répondez s'il vous plaît</p>
+          <h2 className="font-playfair text-5xl md:text-6xl text-beret-blue dark:text-beret-blue-light">Join the Celebration</h2>
           <div className="mt-8 mx-auto w-16 h-px bg-warm-gold" />
-          <p className="mt-8 text-charcoal text-xl font-light italic">
-            Kindly reply by <span className="font-bold text-beret-blue not-italic">    March 15, 2026 </span>
+          <p className="mt-8 text-charcoal dark:text-paper-cream text-xl font-light italic">
+            Kindly reply by <span className="font-bold text-beret-blue dark:text-beret-blue-light not-italic">    March 15, 2026 </span>
           </p>
         </motion.div>
 
@@ -201,7 +201,7 @@ export default function RSVPForm() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, type: "spring" }}
-                className="bg-white rounded-[3rem] p-12 md:p-20 shadow-2xl shadow-sage/10 border border-sage/10 text-center relative overflow-hidden"
+                className="bg-white dark:bg-dark-card rounded-[3rem] p-12 md:p-20 shadow-2xl shadow-sage/10 border border-sage/10 text-center relative overflow-hidden"
               >
                 {/* Decorative bursts */}
                 <div className="absolute top-0 left-0 w-32 h-32 bg-sage/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2" />
@@ -214,14 +214,14 @@ export default function RSVPForm() {
                   </svg>
                 </div>
 
-                <h3 className="font-script text-6xl md:text-8xl text-beret-blue mb-8">Merci!</h3>
-                <p className="text-charcoal text-2xl mb-4 font-medium">Request sent.</p>
-                <p className="text-sketch-gray text-lg mb-8 max-w-sm mx-auto font-light italic">
+                <h3 className="font-script text-6xl md:text-8xl text-beret-blue dark:text-beret-blue-light mb-8">Merci!</h3>
+                <p className="text-charcoal dark:text-paper-cream text-2xl mb-4 font-medium">Request sent.</p>
+                <p className="text-sketch-gray dark:text-sketch-gray/80 text-lg mb-8 max-w-sm mx-auto font-light italic">
                   We&apos;ve sent your RSVP to the host. If you don&apos;t receive a confirmation soon, please try again or contact the host.
                 </p>
 
-                <div className="inline-block bg-[#f8f6f2] rounded-3xl px-10 py-5 border border-sketch-gray/5 mb-8">
-                  <p className="font-playfair text-xl text-charcoal italic">
+                <div className="inline-block bg-[#f8f6f2] dark:bg-dark-bg rounded-3xl px-10 py-5 border border-sketch-gray/5 dark:border-dark-border mb-8">
+                  <p className="font-playfair text-xl text-charcoal dark:text-paper-cream italic">
                     See you in Paris! <span className="text-xs not-italic opacity-40 ml-2 uppercase font-bold tracking-widest">(aka Weston)</span>
                   </p>
                 </div>
@@ -243,7 +243,7 @@ export default function RSVPForm() {
                 key="form"
                 exit={{ opacity: 0, y: -20 }}
                 onSubmit={handleSubmit}
-                className="bg-white rounded-[3rem] p-10 md:p-16 shadow-2xl shadow-sketch-gray/5 border border-sketch-gray/10 relative overflow-hidden"
+                className="bg-white dark:bg-dark-card rounded-[3rem] p-10 md:p-16 shadow-2xl shadow-sketch-gray/5 border border-sketch-gray/10 dark:border-dark-border relative overflow-hidden"
               >
                 {/* Elegant top accent */}
                 <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-beret-blue via-sage to-warm-gold opacity-60" />
@@ -308,10 +308,10 @@ export default function RSVPForm() {
                           type="text"
                           readOnly
                           value="1 Guest"
-                          className={`${inputClasses} bg-sketch-gray/5 text-sketch-gray/60 cursor-not-allowed focus:ring-0 focus:border-sketch-gray/10`}
+                          className={`${inputClasses} bg-sketch-gray/5 dark:bg-sketch-gray/10 text-sketch-gray/60 cursor-not-allowed focus:ring-0 focus:border-sketch-gray/10 dark:focus:border-dark-border`}
                           title="RSVPs are limited to 1 guest"
                         />
-                        <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-sketch-gray/40">
+                        <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-sketch-gray/40 dark:text-sketch-gray/60">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                             <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -339,7 +339,7 @@ export default function RSVPForm() {
                   {/* Message */}
                   <div>
                     <label htmlFor="message" className={labelClasses}>
-                      Note for Victoria <span className="text-sketch-gray/30 lowercase tracking-normal ml-2 italic">(Optional)</span>
+                      Note for Victoria <span className="text-sketch-gray/40 lowercase tracking-normal ml-2 italic">(Optional)</span>
                     </label>
                     <textarea
                       id="message"
