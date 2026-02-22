@@ -68,14 +68,14 @@ export default function Hero() {
           >
             <motion.p
               variants={itemVariants}
-              className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-sketch-gray font-medium"
+              className="text-[10px] md:text-xs uppercase tracking-[0.4em] text-sketch-gray dark:text-sketch-gray/80 font-medium"
             >
               Join us for a Parisian
             </motion.p>
 
             <motion.h1
               variants={itemVariants}
-              className="font-playfair text-5xl md:text-7xl lg:text-9xl font-bold text-beret-blue leading-tight tracking-tight px-2"
+              className="font-playfair text-5xl md:text-7xl lg:text-9xl font-bold text-beret-blue dark:text-beret-blue-light leading-tight tracking-tight px-2"
             >
               Baby Sprinkle
             </motion.h1>
@@ -84,8 +84,8 @@ export default function Hero() {
               variants={itemVariants}
               className="flex flex-col items-center -mt-2 md:-mt-4"
             >
-              <span className="text-sketch-gray text-xs md:text-sm uppercase tracking-widest italic mb-1">In Honor of</span>
-              <p className="font-script text-5xl md:text-7xl lg:text-8xl text-charcoal transform -rotate-1 px-4">
+              <span className="text-sketch-gray dark:text-sketch-gray/80 text-xs md:text-sm uppercase tracking-widest italic mb-1">In Honor of</span>
+              <p className="font-script text-5xl md:text-7xl lg:text-8xl text-charcoal dark:text-paper-cream transform -rotate-1 px-4">
                 Victoria
               </p>
             </motion.div>
@@ -100,14 +100,15 @@ export default function Hero() {
                 <span className="block w-12 md:w-20 h-px bg-warm-gold" />
               </div>
 
-              <p className="text-sketch-gray text-lg md:text-xl font-light max-w-md mx-auto italic">
+              <p className="text-sketch-gray dark:text-sketch-gray/80 text-lg md:text-xl font-light max-w-md mx-auto italic">
                 A sweet celebration of the new arrival.
               </p>
             </motion.div>
 
-            {/* The dynamically positioned Penguin waddling INTO the document flow */}
-            <div className="mt-4 mb-2 flex justify-center md:justify-start w-full">
-              <div className="relative w-[100px] sm:w-[130px] md:w-[206px] lg:w-[244px] h-[100px] sm:h-[130px] md:h-[200px]">
+            {/* Combined Container for Penguin and Button to sit side-by-side on desktop */}
+            <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start w-full mt-4 md:mt-0 mb-2 gap-4 md:gap-8">
+              {/* The dynamically positioned Penguin waddling INTO the document flow */}
+              <div className="relative w-[100px] sm:w-[130px] md:w-[180px] lg:w-[220px] h-[100px] sm:h-[130px] md:h-[180px] shrink-0">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.6 }}
                   animate={{
@@ -135,32 +136,32 @@ export default function Hero() {
                   }} />
                 </motion.div>
               </div>
-            </div>
 
-            <motion.div variants={itemVariants} className="mt-4">
-              <button
-                onClick={scrollToRSVP}
-                className="group relative px-12 py-5 bg-beret-blue text-white font-bold text-xl rounded-full
-                        shadow-2xl shadow-beret-blue/30 overflow-hidden
-                        transition-all duration-500 ease-out
-                        hover:shadow-beret-blue/50 hover:-translate-y-1.5 active:translate-y-0
-                        cursor-pointer"
-              >
-                <span className="relative z-10 flex items-center gap-3">
-                  RSVP Now
-                  <svg
-                    className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-                {/* Glossy hover effect */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
-              </button>
-            </motion.div>
+              <motion.div variants={itemVariants} className="mb-2 md:mb-8">
+                <button
+                  onClick={scrollToRSVP}
+                  className="group relative px-10 py-4 md:px-12 md:py-5 bg-beret-blue text-white font-bold text-lg md:text-xl rounded-full
+                          shadow-2xl shadow-beret-blue/30 overflow-hidden
+                          transition-all duration-500 ease-out
+                          hover:shadow-beret-blue/50 hover:-translate-y-1.5 active:translate-y-0
+                          cursor-pointer whitespace-nowrap"
+                >
+                  <span className="relative z-10 flex items-center gap-3">
+                    RSVP Now
+                    <svg
+                      className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-2"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </span>
+                  {/* Glossy hover effect */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out" />
+                </button>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>
